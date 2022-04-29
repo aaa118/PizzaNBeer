@@ -1,6 +1,5 @@
 package com.demo.pizzanbeer.di
 
-import com.demo.pizzanbeer.network.RickNMortyApi
 import com.demo.pizzanbeer.network.YelpApi
 import dagger.Module
 import dagger.Provides

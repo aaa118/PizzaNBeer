@@ -2,7 +2,7 @@ package com.demo.pizzanbeer.repo
 
 import com.demo.pizzanbeer.db.AppDatabase
 import com.demo.pizzanbeer.model.Businesses
-import com.demo.pizzanbeer.network.RickNMortyApi
+import com.demo.pizzanbeer.model.YelpResponse
 import com.demo.pizzanbeer.network.YelpApi
 import kotlinx.coroutines.flow.Flow
 import java.util.logging.Logger
@@ -16,26 +16,21 @@ class PizzaNBeerRepository @Inject constructor(
 
     suspend fun makePizzaApiCall() {
         val pizzaResponse = yelpApi.getPizzaBusinesses()
-        if (pizzaResponse != null) {
-            pizzaResponse.businesses.forEach {
-                it.categories[0].alias = "Pizza"
-            }
-            saveListToDb(pizzaResponse.businesses)
-            logger.info("Call Successful")
-        } else {
-            logger.info("Response is null.")
-        }
+        processResponseAndSaveToDb(pizzaResponse, "Pizza")
     }
 
     suspend fun makeBeerApiCall() {
         val beerResponse = yelpApi.getBeerBusinesses()
-        if (beerResponse != null) {
-            beerResponse.businesses.forEach {
-                it.categories[0].alias = "Beer"
-            }
-            saveListToDb(beerResponse.businesses)
-            logger.info("Call Successful")
+        processResponseAndSaveToDb(beerResponse, "Beer")
+    }
 
+    private suspend fun processResponseAndSaveToDb(yelpResponse: YelpResponse?, alias: String) {
+        if (yelpResponse != null) {
+            yelpResponse.businesses.forEach {
+                it.categories[0].alias = alias
+            }
+            saveListToDb(yelpResponse.businesses)
+            logger.info("Call Successful")
         } else {
             logger.info("Response is null.")
         }
