@@ -11,14 +11,8 @@ import javax.inject.Inject
 class PizzaNBeerRepository @Inject constructor(
     private val appDatabase: AppDatabase,
     private val yelpApi: YelpApi,
-    private val rickNMortyApi: RickNMortyApi,
     private val logger: Logger,
 ) {
-
-    suspend fun makeRickNMortyApiCall() {
-        val response = rickNMortyApi.getInfo()
-        logger.info("Call $response")
-    }
 
     suspend fun makePizzaApiCall() {
         val pizzaResponse = yelpApi.getPizzaBusinesses()
