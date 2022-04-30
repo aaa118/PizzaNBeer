@@ -16,12 +16,12 @@ class PizzaNBeerRepository @Inject constructor(
 
     suspend fun makePizzaApiCall() {
         val pizzaResponse = yelpApi.getPizzaBusinesses()
-        processResponseAndSaveToDb(pizzaResponse, "Pizza")
+        processResponseAndSaveToDb(pizzaResponse, PIZZA)
     }
 
     suspend fun makeBeerApiCall() {
         val beerResponse = yelpApi.getBeerBusinesses()
-        processResponseAndSaveToDb(beerResponse, "Beer")
+        processResponseAndSaveToDb(beerResponse, BEER)
     }
 
     private suspend fun processResponseAndSaveToDb(yelpResponse: YelpResponse?, alias: String) {
@@ -42,5 +42,10 @@ class PizzaNBeerRepository @Inject constructor(
 
     fun getFromDb(): Flow<List<Businesses>> {
         return appDatabase.businessesDao().getAll()
+    }
+
+    companion object {
+        const val BEER = "Beer"
+        const val PIZZA = "Pizza"
     }
 }

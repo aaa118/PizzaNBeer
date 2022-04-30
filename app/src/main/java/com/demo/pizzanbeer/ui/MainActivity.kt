@@ -11,12 +11,12 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
         startListFragment()
-
     }
+
     private fun startListFragment() {
         supportFragmentManager.beginTransaction().apply {
             val listFragment = ListFragment()
-            add(activityMainBinding.fragmentContainer.id, listFragment)
+            replace(activityMainBinding.fragmentContainer.id, listFragment)
             addToBackStack(null)
             commit()
         }

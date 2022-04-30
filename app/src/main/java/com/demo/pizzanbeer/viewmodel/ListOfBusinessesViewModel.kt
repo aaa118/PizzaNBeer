@@ -19,6 +19,5 @@ class ListOfBusinessesViewModel(private val pizzaNBeerRepository: PizzaNBeerRepo
         CoroutineScope(Dispatchers.IO).async {
             pizzaNBeerRepository.makePizzaApiCall()
             pizzaNBeerRepository.makeBeerApiCall()
-        }
-    }
+        }    }
 }
