@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     private fun startListFragment() {
         supportFragmentManager.beginTransaction().apply {
             val listFragment = ListFragment()
-            add(activityMainBinding.fragmentContainer.id, listFragment)
+            replace(activityMainBinding.fragmentContainer.id, listFragment)
             addToBackStack(null)
             commit()
         }
