@@ -55,7 +55,11 @@ class ListFragment : Fragment() {
                 listOfBusinessesViewModel.loadApi()
             }
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        pizzaNBeerRepository.getFromDb()
     }
 
     private fun startRecyclerView(listOfBusinesses: List<Businesses>) {

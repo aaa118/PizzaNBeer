@@ -34,6 +34,12 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -78,4 +84,9 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+
+    testImplementation 'org.robolectric:robolectric:4.8'
+
+    def fragment_version = "1.5.5"
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
 }

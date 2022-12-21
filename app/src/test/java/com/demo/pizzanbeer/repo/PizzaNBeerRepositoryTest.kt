@@ -23,10 +23,12 @@ class PizzaNBeerRepositoryTest {
 
     @RelaxedMockK
     private lateinit var yelpApi: YelpApi
+
     @RelaxedMockK
     private lateinit var appDatabase: AppDatabase
+
     @RelaxedMockK
-    private lateinit var logger :Logger
+    private lateinit var logger: Logger
 
     @Before
     fun setUp() {
@@ -41,8 +43,8 @@ class PizzaNBeerRepositoryTest {
         coEvery { yelpApi.getBeerBusinesses() } returns yelpResponse
         pizzaNBeerRepository.makeBeerApiCall()
 
-        coVerify (exactly = 1) { yelpApi.getBeerBusinesses() }
-        verify (exactly = 1) { logger.info("Call Successful") }
+        coVerify(exactly = 1) { yelpApi.getBeerBusinesses() }
+        verify(exactly = 1) { logger.info("Call Successful") }
     }
 
     @ExperimentalCoroutinesApi
@@ -51,8 +53,8 @@ class PizzaNBeerRepositoryTest {
         coEvery { yelpApi.getBeerBusinesses() } returns null
         pizzaNBeerRepository.makeBeerApiCall()
 
-        coVerify (exactly = 1) { yelpApi.getBeerBusinesses() }
-        verify (exactly = 1) { logger.info("Response is null.") }
+        coVerify(exactly = 1) { yelpApi.getBeerBusinesses() }
+        verify(exactly = 1) { logger.info("Response is null.") }
     }
 
     @ExperimentalCoroutinesApi
@@ -62,8 +64,8 @@ class PizzaNBeerRepositoryTest {
         coEvery { yelpApi.getPizzaBusinesses() } returns yelpResponse
         pizzaNBeerRepository.makePizzaApiCall()
 
-        coVerify (exactly = 1) { yelpApi.getPizzaBusinesses() }
-        verify (exactly = 1) { logger.info("Call Successful") }
+        coVerify(exactly = 1) { yelpApi.getPizzaBusinesses() }
+        verify(exactly = 1) { logger.info("Call Successful") }
     }
 
     @ExperimentalCoroutinesApi
@@ -72,12 +74,15 @@ class PizzaNBeerRepositoryTest {
         coEvery { yelpApi.getPizzaBusinesses() } returns null
         pizzaNBeerRepository.makePizzaApiCall()
 
-        coVerify (exactly = 1) { yelpApi.getPizzaBusinesses() }
-        verify (exactly = 1) { logger.info("Response is null.") }
+        coVerify(exactly = 1) { yelpApi.getPizzaBusinesses() }
+        verify(exactly = 1) { logger.info("Response is null.") }
     }
 
     private fun createFakeList(): MutableList<Businesses> {
-        val businesses = Businesses(1.9, "", "", "", "", 23.0, emptyList())
+        val businesses = Businesses(
+            1.9, "", "", "", "",
+            23.0, emptyList(), ""
+        )
         val list = mutableListOf<Businesses>()
         list.add(businesses)
         return list
